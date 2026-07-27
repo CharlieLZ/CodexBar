@@ -244,6 +244,7 @@
 "Picker subtitle" = "زیرعنوان پیکر";
 "Placeholder" = "جایگزین جایگزین";
 "Plan" = "طرح";
+"Plan expires: %@" = "پایان طرح: %@";
 "Plan Usage" = "استفاده از طرح";
 "Play full-screen confetti when weekly usage resets." = "وقتی استفاده هفتگی ریست می شود، کنفتی تمام صفحه را پخش کنید.";
 "Polls OpenAI/Claude status pages and Google Workspace for " = "نظرسنجی ها OpenAI/Claude صفحات وضعیت و Google Workspace for ";
@@ -259,6 +260,7 @@
 "Random (default)" = "تصادفی (پیش فرض)";
 "Reads local usage logs. Shows today + last 30 days cost in the menu." = "گزارش های استفاده محلی را می خواند. امروز نمایش داده می شود + پنجره تاریخچه انتخاب شده در منو.";
 "Refresh" = "تازه سازی";
+"Renews: %@" = "تمدید: %@";
 "Refresh cadence" = "کادانس تازه سازی";
 "Remote" = "دورافتاده";
 "Remove" = "حذف";

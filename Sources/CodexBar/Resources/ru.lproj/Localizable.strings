@@ -261,6 +261,7 @@
 "Picker subtitle" = "Описание выбора";
 "Placeholder" = "Подсказка";
 "Plan" = "План";
+"Plan expires: %@" = "Срок действия плана: %@";
 "Plan Usage" = "Использование плана";
 "Play full-screen confetti when weekly usage resets." = "Показывать полноэкранное конфетти при сбросе недельного лимита.";
 "Polls OpenAI/Claude status pages and Google Workspace for " = "Опрашивает страницы статуса OpenAI/Claude и Google Workspace для ";
@@ -276,6 +277,7 @@
 "Random (default)" = "Случайный (по умолчанию)";
 "Reads local usage logs. Shows today + last 30 days cost in the menu." = "Читает локальные журналы использования. Показывает в меню сегодняшние расходы и выбранное окно истории.";
 "Refresh" = "Обновить";
+"Renews: %@" = "Продление: %@";
 "Refresh cadence" = "Частота обновления";
 "Remote" = "Удалённо";
 "Remove" = "Удалить";

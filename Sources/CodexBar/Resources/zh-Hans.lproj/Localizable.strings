@@ -264,6 +264,7 @@
 "Picker subtitle" = "选择器副标题";
 "Placeholder" = "占位符";
 "Plan" = "套餐";
+"Plan expires: %@" = "会员到期：%@";
 "Plan Usage" = "套餐用量";
 "Play full-screen confetti when weekly usage resets." = "当每周用量重置时播放全屏彩纸。";
 "Polls OpenAI/Claude status pages and Google Workspace for " = "轮询 OpenAI/Claude 状态页面和 Google Workspace，以检查";
@@ -279,6 +280,7 @@
 "Random (default)" = "随机（默认）";
 "Reads local usage logs. Shows today + last 30 days cost in the menu." = "读取本地用量日志。在菜单中显示今天及所选历史窗口的费用。";
 "Refresh" = "刷新";
+"Renews: %@" = "下次账单日：%@";
 "Refreshing" = "正在刷新";
 "Refresh cadence" = "刷新频率";
 "Remote" = "远程";

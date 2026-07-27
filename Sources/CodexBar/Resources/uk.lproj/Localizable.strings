@@ -259,6 +259,7 @@
 "Picker subtitle" = "Підзаголовок засобу вибору";
 "Placeholder" = "Заповнювач";
 "Plan" = "План";
+"Plan expires: %@" = "Термін дії плану: %@";
 "Plan Usage" = "Використання плану";
 "Play full-screen confetti when weekly usage resets." = "Відтворення конфетті на весь екран, коли тижневе використання скидається.";
 "Polls OpenAI/Claude status pages and Google Workspace for " = "Опитує сторінки статусу OpenAI/Claude і Google Workspace для";
@@ -274,6 +275,7 @@
 "Random (default)" = "Випадковий (за замовчуванням)";
 "Reads local usage logs. Shows today + last 30 days cost in the menu." = "Читає локальні журнали використання. Показує сьогодні + вибране вікно історії в меню.";
 "Refresh" = "Оновити";
+"Renews: %@" = "Поновлення: %@";
 "Refresh cadence" = "Оновити каденцію";
 "Remote" = "Дистанційний";
 "Remove" = "Видалити";

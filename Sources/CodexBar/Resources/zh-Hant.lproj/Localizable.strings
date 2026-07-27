@@ -266,6 +266,7 @@
 "Picker subtitle" = "選擇器副標題";
 "Placeholder" = "預留位置";
 "Plan" = "方案";
+"Plan expires: %@" = "會員到期：%@";
 "Plan Usage" = "方案用量";
 "Play full-screen confetti when weekly usage resets." = "每週使用量重置時播放全螢幕慶祝動畫。";
 "Polls OpenAI/Claude status pages and Google Workspace for " = "輪詢 OpenAI/Claude 狀態頁面和 Google Workspace，以檢查";
@@ -281,6 +282,7 @@
 "Random (default)" = "隨機（預設）";
 "Reads local usage logs. Shows today + last 30 days cost in the menu." = "讀取本機使用量記錄。在選單中顯示今天及所選歷史時段的費用。";
 "Refresh" = "重新整理";
+"Renews: %@" = "下次帳單日：%@";
 "Refreshing" = "正在重新整理";
 "Refresh cadence" = "重新整理頻率";
 "Remote" = "遠端";

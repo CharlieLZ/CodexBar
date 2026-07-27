@@ -68,14 +68,23 @@ public struct CodexReconciledState: Sendable {
             updatedAt: snapshot.updatedAt)
     }
 
-    public func toUsageSnapshot() -> UsageSnapshot {
+    public func toUsageSnapshot(
+        codexResetCredits: CodexRateLimitResetCreditsSnapshot? = nil,
+        subscriptionExpiresAt: Date? = nil,
+        subscriptionRenewsAt: Date? = nil,
+        dataConfidence: UsageDataConfidence = .unknown) -> UsageSnapshot
+    {
         UsageSnapshot(
             primary: self.session,
             secondary: self.weekly,
             tertiary: nil,
             extraRateWindows: self.extraRateWindows.isEmpty ? nil : self.extraRateWindows,
+            codexResetCredits: codexResetCredits,
+            subscriptionExpiresAt: subscriptionExpiresAt,
+            subscriptionRenewsAt: subscriptionRenewsAt,
             updatedAt: self.updatedAt,
-            identity: self.identity)
+            identity: self.identity,
+            dataConfidence: dataConfidence)
     }
 
     public static func oauthIdentity(

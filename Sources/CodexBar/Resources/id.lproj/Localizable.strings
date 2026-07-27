@@ -244,6 +244,7 @@
 "Picker subtitle" = "Subjudul pemilih";
 "Placeholder" = "Placeholder";
 "Plan" = "Paket";
+"Plan expires: %@" = "Paket berakhir: %@";
 "Plan Usage" = "Penggunaan Paket";
 "Play full-screen confetti when weekly usage resets." = "Mainkan confetti layar penuh saat penggunaan mingguan direset.";
 "Polls OpenAI/Claude status pages and Google Workspace for " = "Memeriksa halaman status OpenAI/Claude dan Google Workspace untuk ";
@@ -259,6 +260,7 @@
 "Random (default)" = "Acak (bawaan)";
 "Reads local usage logs. Shows today + last 30 days cost in the menu." = "Membaca log penggunaan lokal. Menampilkan hari ini + jendela riwayat yang dipilih di menu.";
 "Refresh" = "Segarkan";
+"Renews: %@" = "Diperpanjang: %@";
 "Refresh cadence" = "Frekuensi penyegaran";
 "Remote" = "Jarak jauh";
 "Remove" = "Hapus";

@@ -183,6 +183,7 @@ struct CodexOAuthFetchStrategy: ProviderFetchStrategy {
             accessToken: credentials.accessToken,
             accountId: credentials.accountId,
             env: context.env)
+        let subscriptionMetadata = try await Self.fetchSubscriptionMetadata(credentials: credentials)
         let resetCredits = try await Self.fetchResetCreditsIfRequested(
             context: context,
             credentials: credentials)
@@ -190,6 +191,7 @@ struct CodexOAuthFetchStrategy: ProviderFetchStrategy {
         let oauthResult = try Self.makeResult(
             usageResponse: usage,
             resetCredits: resetCredits,
+            subscription: subscriptionMetadata,
             credentials: credentials,
             updatedAt: updatedAt,
             allowEmptyUsageForResetCreditEnrichment: Self.defersResetCreditFetchToApp(context))
@@ -249,6 +251,7 @@ struct CodexOAuthFetchStrategy: ProviderFetchStrategy {
     private static func makeResult(
         usageResponse: CodexUsageResponse,
         resetCredits: CodexRateLimitResetCreditsSnapshot? = nil,
+        subscription: CodexSubscriptionMetadata? = nil,
         credentials: CodexOAuthCredentials,
         updatedAt: Date,
         allowEmptyUsageForResetCreditEnrichment: Bool = false) throws -> ProviderFetchResult
@@ -265,9 +268,11 @@ struct CodexOAuthFetchStrategy: ProviderFetchStrategy {
                 ? .unknown
                 : .exact
             return CodexOAuthFetchStrategy().makeResult(
-                usage: reconciled.toUsageSnapshot()
-                    .withCodexResetCredits(resetCredits)
-                    .withDataConfidence(dataConfidence),
+                usage: reconciled.toUsageSnapshot(
+                    codexResetCredits: resetCredits,
+                    subscriptionExpiresAt: subscription?.expiresAt,
+                    subscriptionRenewsAt: subscription?.renewsAt,
+                    dataConfidence: dataConfidence),
                 credits: credits,
                 sourceLabel: "oauth")
         }
@@ -287,6 +292,8 @@ struct CodexOAuthFetchStrategy: ProviderFetchStrategy {
                 secondary: nil,
                 tertiary: nil,
                 codexResetCredits: resetCredits,
+                subscriptionExpiresAt: subscription?.expiresAt,
+                subscriptionRenewsAt: subscription?.renewsAt,
                 updatedAt: updatedAt,
                 identity: CodexReconciledState.oauthIdentity(
                     response: usageResponse,
@@ -345,6 +352,34 @@ struct CodexOAuthFetchStrategy: ProviderFetchStrategy {
             })
     }
 
+    private static func fetchSubscriptionMetadata(
+        credentials: CodexOAuthCredentials) async throws -> CodexSubscriptionMetadata?
+    {
+        try await self.fetchSubscriptionMetadata(
+            credentials: credentials,
+            fetcher: { credentials in
+                try await CodexSubscriptionFetcher.fetch(
+                    accessToken: credentials.accessToken,
+                    accountId: credentials.accountId)
+            })
+    }
+
+    private static func fetchSubscriptionMetadata(
+        credentials: CodexOAuthCredentials,
+        fetcher: @escaping @Sendable (CodexOAuthCredentials) async throws
+            -> CodexSubscriptionMetadata?) async throws -> CodexSubscriptionMetadata?
+    {
+        guard credentials.accountId?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false else {
+            return nil
+        }
+        do {
+            return try await fetcher(credentials)
+        } catch {
+            if error is CancellationError || Task.isCancelled { throw CancellationError() }
+            return nil
+        }
+    }
+
     private static func defersResetCreditFetchToApp(_ context: ProviderFetchContext) -> Bool {
         if case .app = context.runtime { return true }
         return false
@@ -394,6 +429,14 @@ struct CodexOAuthFetchStrategy: ProviderFetchStrategy {
 
 #if DEBUG
 extension CodexOAuthFetchStrategy {
+    static func _fetchSubscriptionMetadataForTesting(
+        credentials: CodexOAuthCredentials,
+        fetcher: @escaping @Sendable (CodexOAuthCredentials) async throws
+            -> CodexSubscriptionMetadata?) async throws -> CodexSubscriptionMetadata?
+    {
+        try await self.fetchSubscriptionMetadata(credentials: credentials, fetcher: fetcher)
+    }
+
     static func _fetchResetCreditsForTesting(
         context: ProviderFetchContext,
         credentials: CodexOAuthCredentials,
@@ -423,6 +466,7 @@ extension CodexOAuthFetchStrategy {
         _ data: Data,
         credentials: CodexOAuthCredentials,
         resetCredits: CodexRateLimitResetCreditsSnapshot? = nil,
+        subscription: CodexSubscriptionMetadata? = nil,
         sourceMode: ProviderSourceMode = .oauth,
         allowEmptyUsageForResetCreditEnrichment: Bool = false) throws -> ProviderFetchResult
     {
@@ -431,6 +475,7 @@ extension CodexOAuthFetchStrategy {
         return try Self.makeResult(
             usageResponse: usageResponse,
             resetCredits: resetCredits,
+            subscription: subscription,
             credentials: credentials,
             updatedAt: Date(),
             allowEmptyUsageForResetCreditEnrichment: allowEmptyUsageForResetCreditEnrichment)

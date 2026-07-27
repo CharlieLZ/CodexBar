@@ -244,6 +244,7 @@
 "Picker subtitle" = "คําบรรยาย Picker";
 "Placeholder" = "ตัวยึดตําแหน่ง";
 "Plan" = "วางแผน";
+"Plan expires: %@" = "แพ็กเกจหมดอายุ: %@";
 "Plan Usage" = "การใช้งานแผน";
 "Play full-screen confetti when weekly usage resets." = "เล่นลูกปาแบบเต็มหน้าจอเมื่อรีเซ็ตการใช้งานรายสัปดาห์";
 "Polls OpenAI/Claude status pages and Google Workspace for " = "โพล OpenAI/Claude หน้าสถานะและพื้นที่ทํางาน Google สําหรับ  ";
@@ -259,6 +260,7 @@
 "Random (default)" = "สุ่ม (ค่าเริ่มต้น)";
 "Reads local usage logs. Shows today + last 30 days cost in the menu." = "อ่านบันทึกการใช้งานในเครื่อง แสดงวันนี้ + หน้าต่างประวัติที่เลือกในเมนู";
 "Refresh" = "รีเฟรช";
+"Renews: %@" = "ต่ออายุ: %@";
 "Refresh cadence" = "จังหวะการรีเฟรช";
 "Remote" = "ระยะไกล";
 "Remove" = "ลบ";

@@ -244,6 +244,7 @@
 "Picker subtitle" = "عنوان فرعي لاختيار";
 "Placeholder" = "العنصر المؤقت";
 "Plan" = "الخطة";
+"Plan expires: %@" = "تنتهي الخطة: %@";
 "Plan Usage" = "استخدام الخطة";
 "Play full-screen confetti when weekly usage resets." = "شغل ورق الورق الورقية بملء الشاشة عند إعادة ضبط الاستخدام الأسبوعي.";
 "Polls OpenAI/Claude status pages and Google Workspace for " = "استطلاعات OpenAI/Claude صفحات الحالة ومساحة العمل Google ل  ";
@@ -259,6 +260,7 @@
 "Random (default)" = "عشوائي (افتراضي)";
 "Reads local usage logs. Shows today + last 30 days cost in the menu." = "يقرأ سجلات الاستخدام المحلية. يعرض اليوم + نافذة التاريخ المحددة في القائمة.";
 "Refresh" = "تحديث";
+"Renews: %@" = "تتجدد: %@";
 "Refresh cadence" = "وتيرة التحديث";
 "Remote" = "البعيد";
 "Remove" = "إزالة";

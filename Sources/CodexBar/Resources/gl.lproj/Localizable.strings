@@ -242,6 +242,7 @@
 "Picker subtitle" = "Subtítulo do selector";
 "Placeholder" = "Texto de marcador";
 "Plan" = "Plan";
+"Plan expires: %@" = "O plan caduca: %@";
 "Play full-screen confetti when weekly usage resets." = "Amosar confeti a pantalla completa cando se reinicie o uso semanal.";
 "Polls OpenAI/Claude status pages and Google Workspace for " = "Consulta as páxinas de estado de OpenAI/Claude e Google Workspace para ";
 "Prevents any Keychain access while enabled." = "Evita calquera acceso ao Chaveiro mentres estea activado.";
@@ -256,6 +257,7 @@
 "Random (default)" = "Aleatorio (por defecto)";
 "Reads local usage logs. Shows today + last 30 days cost in the menu." = "Le os rexistros de uso locais. Amosa o custo de hoxe + a xanela de historial seleccionada no menú.";
 "Refresh" = "Actualizar";
+"Renews: %@" = "Renóvase: %@";
 "Refresh cadence" = "Frecuencia de actualización";
 "Remote" = "Remoto";
 "Remove" = "Eliminar";

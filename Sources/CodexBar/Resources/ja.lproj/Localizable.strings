@@ -259,6 +259,7 @@
 "Picker subtitle" = "ピッカーのサブタイトル";
 "Placeholder" = "プレースホルダ";
 "Plan" = "プラン";
+"Plan expires: %@" = "プランの有効期限：%@";
 "Plan Usage" = "プラン使用状況";
 "Play full-screen confetti when weekly usage resets." = "週間使用量がリセットされたときに全画面の紙吹雪を表示します。";
 "Polls OpenAI/Claude status pages and Google Workspace for " = "OpenAI/Claude のステータスページと Google Workspace をポーリングして、";
@@ -274,6 +275,7 @@
 "Random (default)" = "ランダム（デフォルト）";
 "Reads local usage logs. Shows today + last 30 days cost in the menu." = "ローカルの使用ログを読み取り、今日のコストと選択した履歴期間のコストをメニューに表示します。";
 "Refresh" = "更新";
+"Renews: %@" = "更新日：%@";
 "Refresh cadence" = "更新間隔";
 "Remote" = "リモート";
 "Remove" = "削除";

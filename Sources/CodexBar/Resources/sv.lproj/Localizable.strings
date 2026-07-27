@@ -260,6 +260,7 @@
 "Picker subtitle" = "Väljarunderrubrik";
 "Placeholder" = "Platshållare";
 "Plan" = "Plan";
+"Plan expires: %@" = "Abonnemanget löper ut: %@";
 "Plan Usage" = "Plananvändning";
 "Play full-screen confetti when weekly usage resets." = "Spela konfetti i helskärm när veckoförbrukningen återställs.";
 "Polls OpenAI/Claude status pages and Google Workspace for " = "Kontrollerar OpenAI/Claude-statussidor och Google Workspace för ";
@@ -275,6 +276,7 @@
 "Random (default)" = "Slumpmässig (standard)";
 "Reads local usage logs. Shows today + last 30 days cost in the menu." = "Läser lokala användningsloggar. Visar idag och valt historikfönster i menyn.";
 "Refresh" = "Uppdatera";
+"Renews: %@" = "Förnyas: %@";
 "Refresh cadence" = "Uppdateringsintervall";
 "Remote" = "Fjärr";
 "Remove" = "Ta bort";

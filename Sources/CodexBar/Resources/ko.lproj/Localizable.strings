@@ -259,6 +259,7 @@
 "Picker subtitle" = "선택기 부제목";
 "Placeholder" = "플레이스홀더";
 "Plan" = "요금제";
+"Plan expires: %@" = "요금제 만료: %@";
 "Plan Usage" = "요금제 사용량";
 "Play full-screen confetti when weekly usage resets." = "주간 사용량이 재설정되면 전체 화면 색종이를 재생합니다.";
 "Polls OpenAI/Claude status pages and Google Workspace for " = "OpenAI/Claude 상태 페이지와 Google Workspace를 폴링하여 ";
@@ -274,6 +275,7 @@
 "Random (default)" = "무작위 (기본값)";
 "Reads local usage logs. Shows today + last 30 days cost in the menu." = "로컬 사용량 로그를 읽습니다. 메뉴에 오늘과 선택한 기록 기간의 비용을 표시합니다.";
 "Refresh" = "새로 고침";
+"Renews: %@" = "갱신일: %@";
 "Refresh cadence" = "새로 고침 주기";
 "Remote" = "원격";
 "Remove" = "제거";

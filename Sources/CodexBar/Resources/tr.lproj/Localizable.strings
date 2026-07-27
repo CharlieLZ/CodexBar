@@ -244,6 +244,7 @@
 "Picker subtitle" = "Seçici alt başlığı";
 "Placeholder" = "Yer tutucu";
 "Plan" = "Plan";
+"Plan expires: %@" = "Plan sona eriyor: %@";
 "Plan Usage" = "Plan Kullanımı";
 "Play full-screen confetti when weekly usage resets." = "Haftalık kullanım sıfırlandığında tam ekran konfeti oynat.";
 "Polls OpenAI/Claude status pages and Google Workspace for " = "OpenAI/Claude durum sayfalarını ve Google Workspace'i ";
@@ -259,6 +260,7 @@
 "Random (default)" = "Rastgele (varsayılan)";
 "Reads local usage logs. Shows today + last 30 days cost in the menu." = "Yerel kullanım günlüklerini okur. Menüde bugün + seçilen geçmiş penceresini gösterir.";
 "Refresh" = "Yenile";
+"Renews: %@" = "Yenilenme: %@";
 "Refresh cadence" = "Yenileme sıklığı";
 "Remote" = "Uzak";
 "Remove" = "Kaldır";

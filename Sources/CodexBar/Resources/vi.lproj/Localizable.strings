@@ -259,6 +259,7 @@
 "Picker subtitle" = "Tiêu đề phụ của bộ chọn";
 "Placeholder" = "Trình giữ chỗ";
 "Plan" = "Kế hoạch";
+"Plan expires: %@" = "Gói hết hạn: %@";
 "Plan Usage" = "Mức sử dụng gói";
 "Play full-screen confetti when weekly usage resets." = "Phát hoa giấy toàn màn hình khi đặt lại Mức sử dụng hàng tuần.";
 "Polls OpenAI/Claude status pages and Google Workspace for " = "Cuộc thăm dò ý kiến ​​OpenAI / Claude trang trạng thái và Google Không gian làm việc dành cho";
@@ -274,6 +275,7 @@
 "Random (default)" = "Ngẫu nhiên (mặc định)";
 "Reads local usage logs. Shows today + last 30 days cost in the menu." = "Đọc nhật ký Mức sử dụng cục bộ. Hiển thị hôm nay + cửa sổ lịch sử đã chọn trong menu.";
 "Refresh" = "Làm mới";
+"Renews: %@" = "Gia hạn: %@";
 "Refresh cadence" = "Nhịp làm mới";
 "Remote" = "Từ xa";
 "Remove" = "Xóa";

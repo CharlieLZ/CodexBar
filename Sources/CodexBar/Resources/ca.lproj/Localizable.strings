@@ -244,6 +244,7 @@
 "Picker subtitle" = "Subtítol del selector";
 "Placeholder" = "Text de marcador";
 "Plan" = "Pla";
+"Plan expires: %@" = "El pla caduca: %@";
 "Plan Usage" = "Ús del pla";
 "Play full-screen confetti when weekly usage resets." = "Mostreu confeti a pantalla completa quan es reinicia l'ús setmanal.";
 "Polls OpenAI/Claude status pages and Google Workspace for " = "Consulta les pàgines d'estat d'OpenAI/Claude i Google Workspace per a ";
@@ -259,6 +260,7 @@
 "Random (default)" = "Aleatori (per defecte)";
 "Reads local usage logs. Shows today + last 30 days cost in the menu." = "Llegeix els registres d'ús locals. Mostra el cost d'avui + la finestra d'historial seleccionada al menú.";
 "Refresh" = "Actualitza";
+"Renews: %@" = "Es renova: %@";
 "Refresh cadence" = "Freqüència d'actualització";
 "Remote" = "Remot";
 "Remove" = "Elimineu";

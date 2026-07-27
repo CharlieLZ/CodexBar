@@ -257,6 +257,7 @@
 "Picker subtitle" = "Picker-Untertitel";
 "Placeholder" = "Platzhalter";
 "Plan" = "Planen";
+"Plan expires: %@" = "Tarif läuft ab: %@";
 "Plan Usage" = "Plannutzung";
 "Play full-screen confetti when weekly usage resets." = "Spielen Sie Konfetti im Vollbildmodus ab, wenn die wöchentliche Nutzung zurückgesetzt wird.";
 "Polls OpenAI/Claude status pages and Google Workspace for " = "Fragt OpenAI/Claude-Statusseiten und Google Workspace ab";
@@ -272,6 +273,7 @@
 "Random (default)" = "Zufällig (Standard)";
 "Reads local usage logs. Shows today + last 30 days cost in the menu." = "Liest lokale Nutzungsprotokolle. Zeigt heute + das ausgewählte Verlaufsfenster im Menü an.";
 "Refresh" = "Aktualisieren";
+"Renews: %@" = "Verlängert sich: %@";
 "Refresh cadence" = "Trittfrequenz aktualisieren";
 "Remote" = "Remote";
 "Remove" = "Entfernen";
