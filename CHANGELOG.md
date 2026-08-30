@@ -3,6 +3,7 @@
 ## 0.56.1 — Unreleased
 
 ### Fixed
+- Codex: let two exact OAuth observations with reset-credit evidence replace legacy CLI snapshots that lack credit inventory, so stale weekly quota bars refresh after a source transition while incomplete evidence remains fail-closed.
 - Antigravity: reuse a running `agy` by its verified executable path even when its command line uses a bare name, and preserve CLI sign-in guidance when an IDE fallback has no CSRF token (follow-up to #3146). Thanks @haixing23!
 - Codex: add redacted weekly-reset diagnostic reasons for candidate admission, expiry, and account-scoped storage requests without changing reset publication rules (investigated alongside #3248). Thanks @kcharlan!
 - Docs: distinguish OpenCode-backed Codex OAuth quota from unsupported OpenCode session cost imports, preserving existing provider and account boundaries (investigated alongside #3273). Thanks @pedrommone!

@@ -157,11 +157,11 @@ extension UsageStore {
                 outcome: nil,
                 pendingCandidate: nil)
         }
-        let confirmationDecision = CodexWeeklyResetConfirmation.confirmationDecision(
-            previous: publicationBaseline,
-            previousEvidence: previousSnapshot,
-            initial: rawInitialSnapshot,
-            confirmation: confirmationSnapshot)
+        let confirmationDecision = Self.codexWeeklyResetConfirmationDecision(
+            publicationBaseline: publicationBaseline,
+            previousSnapshot: previousSnapshot,
+            initialResult: rawInitialResult,
+            confirmationResult: confirmationResult)
         Self.logCodexWeeklyResetPublicationDecision(
             stage: "confirmation",
             decision: String(describing: confirmationDecision),
@@ -304,6 +304,45 @@ extension UsageStore {
         guard case .oauth = result.strategyKind else { return false }
         return result.sourceLabel.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "oauth"
             && result.usage.scoped(to: .codex).dataConfidence == .exact
+    }
+
+    private nonisolated static func codexWeeklyResetConfirmationDecision(
+        publicationBaseline: UsageSnapshot?,
+        previousSnapshot: UsageSnapshot?,
+        initialResult: ProviderFetchResult,
+        confirmationResult: ProviderFetchResult) -> CodexWeeklyResetConfirmation.ConfirmationDecision
+    {
+        CodexWeeklyResetConfirmation.confirmationDecision(
+            previous: publicationBaseline,
+            previousEvidence: self.codexWeeklyResetPreviousEvidence(
+                previousSnapshot: previousSnapshot,
+                initialResult: initialResult,
+                confirmationResult: confirmationResult),
+            initial: initialResult.usage.scoped(to: .codex),
+            confirmation: confirmationResult.usage.scoped(to: .codex))
+    }
+
+    private nonisolated static func codexWeeklyResetPreviousEvidence(
+        previousSnapshot: UsageSnapshot?,
+        initialResult: ProviderFetchResult,
+        confirmationResult: ProviderFetchResult) -> UsageSnapshot?
+    {
+        guard previousSnapshot?.codexResetCredits == nil,
+              self.isExactCodexOAuthResult(initialResult),
+              self.isExactCodexOAuthResult(confirmationResult)
+        else {
+            return previousSnapshot
+        }
+        let initialSnapshot = initialResult.usage.scoped(to: .codex)
+        let confirmationSnapshot = confirmationResult.usage.scoped(to: .codex)
+        guard initialSnapshot.codexResetCredits != nil,
+              confirmationSnapshot.codexResetCredits != nil
+        else {
+            return previousSnapshot
+        }
+        // Legacy CLI snapshots predate reset-credit evidence. Let two exact OAuth observations
+        // establish the inventory baseline instead of permanently preserving the stale CLI value.
+        return initialSnapshot
     }
 
     private nonisolated static func logCodexWeeklyResetPublicationDecision(
