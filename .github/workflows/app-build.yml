@@ -1,0 +1,36 @@
+name: Build App Artifact
+
+on:
+  push:
+    branches: [ci/app-build]
+  workflow_dispatch:
+
+jobs:
+  build-app:
+    runs-on: macos-26
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select Xcode 26.3
+        run: |
+          set -euo pipefail
+          for candidate in /Applications/Xcode_26.3.app /Applications/Xcode_26.2.app; do
+            if [[ -d "$candidate" ]]; then
+              sudo xcode-select -s "${candidate}/Contents/Developer"
+              break
+            fi
+          done
+          /usr/bin/xcodebuild -version
+
+      - name: Package app (adhoc signed)
+        run: |
+          set -euo pipefail
+          CODEXBAR_SIGNING=adhoc ./Scripts/package_app.sh release
+
+      - name: Upload app artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: CodexBar-app
+          path: CodexBar.app
+          if-no-files-found: error
