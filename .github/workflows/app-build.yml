@@ -26,7 +26,7 @@ jobs:
       - name: Package app (adhoc signed)
         run: |
           set -euo pipefail
-          CODEXBAR_SIGNING=adhoc ./Scripts/package_app.sh debug
+          CODEXBAR_SIGNING=adhoc ./Scripts/package_app.sh release
 
       - name: Upload app artifact
         uses: actions/upload-artifact@v4
