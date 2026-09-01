@@ -8,7 +8,7 @@ on:
 jobs:
   build-app:
     runs-on: macos-26
-    timeout-minutes: 60
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
 
@@ -26,7 +26,7 @@ jobs:
       - name: Package app (adhoc signed)
         run: |
           set -euo pipefail
-          CODEXBAR_SIGNING=adhoc ./Scripts/package_app.sh release
+          CODEXBAR_SIGNING=adhoc ./Scripts/package_app.sh debug
 
       - name: Upload app artifact
         uses: actions/upload-artifact@v4
