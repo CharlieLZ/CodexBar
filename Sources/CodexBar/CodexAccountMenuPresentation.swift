@@ -13,13 +13,13 @@ enum CodexAccountHealth: Equatable {
         case .ok:
             nil
         case .needsReauth:
-            "Needs re-auth"
+            L("Needs re-auth")
         case .workspaceDeactivated:
-            "Workspace deactivated"
+            L("Workspace deactivated")
         case .missingAuth:
-            "Missing auth"
+            L("Missing auth")
         case .unavailable:
-            "Unavailable"
+            L("Unavailable")
         }
     }
 

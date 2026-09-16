@@ -44,6 +44,81 @@ struct ProviderFetchErrorTests {
             claudeFetcher: ClaudeUsageFetcher(browserDetection: browserDetection),
             browserDetection: browserDetection)
     }
+
+    @Test
+    func `pipeline reports the authorization failure a terminal CLI timeout would hide`() async {
+        let pipeline = ProviderFetchPipeline(
+            resolveStrategies: { _ in [
+                CodexAuthorizationFailingStrategy(),
+                CodexTerminalCLIFailureStrategy(
+                    error: RPCWireError.timeout(method: "account/rateLimits/read")),
+            ] },
+            resolveFallbackError: CodexProviderDescriptor.resolveFallbackError)
+
+        let outcome = await pipeline.fetch(context: Self.context(), provider: .codex)
+
+        guard case let .failure(error) = outcome.result else {
+            Issue.record("Expected the pipeline to fail")
+            return
+        }
+        #expect(error.localizedDescription == CodexOAuthFetchError.unauthorized.localizedDescription)
+    }
+
+    @Test
+    func `pipeline keeps an app-server reply over an earlier authorization failure`() async {
+        let reply = RPCWireError.requestFailed(
+            "failed to fetch codex rate limits: GET https://chatgpt.com/backend-api/wham/usage failed: "
+                + "401 Unauthorized; body={\"error\":{\"code\":\"token_expired\"}}")
+        let pipeline = ProviderFetchPipeline(
+            resolveStrategies: { _ in [
+                CodexAuthorizationFailingStrategy(),
+                CodexTerminalCLIFailureStrategy(error: reply),
+            ] },
+            resolveFallbackError: CodexProviderDescriptor.resolveFallbackError)
+
+        let outcome = await pipeline.fetch(context: Self.context(), provider: .codex)
+
+        guard case let .failure(error) = outcome.result else {
+            Issue.record("Expected the pipeline to fail")
+            return
+        }
+        #expect(error.localizedDescription == reply.localizedDescription)
+    }
+}
+
+private struct CodexAuthorizationFailingStrategy: ProviderFetchStrategy {
+    let id = "test.codex.oauth"
+    let kind: ProviderFetchKind = .oauth
+
+    func isAvailable(_: ProviderFetchContext) async -> Bool {
+        true
+    }
+
+    func fetch(_: ProviderFetchContext) async throws -> ProviderFetchResult {
+        throw CodexOAuthFetchError.unauthorized
+    }
+
+    func shouldFallback(on _: Error, context _: ProviderFetchContext) -> Bool {
+        true
+    }
+}
+
+private struct CodexTerminalCLIFailureStrategy: ProviderFetchStrategy {
+    let error: any Error
+    let id = "test.codex.cli"
+    let kind: ProviderFetchKind = .cli
+
+    func isAvailable(_: ProviderFetchContext) async -> Bool {
+        true
+    }
+
+    func fetch(_: ProviderFetchContext) async throws -> ProviderFetchResult {
+        throw self.error
+    }
+
+    func shouldFallback(on _: Error, context _: ProviderFetchContext) -> Bool {
+        false
+    }
 }
 
 private actor DelayedRetryStrategyState {

@@ -861,7 +861,7 @@ private final class CodexRPCClient: @unchecked Sendable {
         arguments: [String] = ["-s", "read-only", "-a", "never", "app-server"],
         environment: [String: String] = ProcessInfo.processInfo.environment,
         initializeTimeoutSeconds: TimeInterval = 8.0,
-        requestTimeoutSeconds: TimeInterval = 3.0,
+        requestTimeoutSeconds: TimeInterval = UsageFetcher.defaultRequestTimeoutSeconds,
         resolveExecutable: CodexExecutableResolver = defaultCodexExecutableResolver) throws
     {
         self.initializeTimeoutSeconds = initializeTimeoutSeconds
@@ -1115,6 +1115,15 @@ private final class CodexRPCClient: @unchecked Sendable {
 // MARK: - Public fetcher used by the app
 
 public struct UsageFetcher: Sendable {
+    /// Budget for a single `codex app-server` JSON-RPC reply.
+    ///
+    /// `account/rateLimits/read` is network-bound: the app-server refreshes the OAuth token and then
+    /// calls the ChatGPT backend, which measured 3.01s to return a plain 401 on this machine. The
+    /// former 3s cap lost that race, killed the process, and reported a fabricated timeout; the
+    /// timeout text carries no auth signal, so the account row degraded to "Unavailable" and the
+    /// store re-entered its connectivity retry schedule instead of surfacing the real failure.
+    static let defaultRequestTimeoutSeconds: TimeInterval = 15.0
+
     private let environment: [String: String]
     private let initializeTimeoutSeconds: TimeInterval
     private let requestTimeoutSeconds: TimeInterval
@@ -1124,7 +1133,7 @@ public struct UsageFetcher: Sendable {
     public init(environment: [String: String] = ProcessInfo.processInfo.environment) {
         self.environment = environment
         self.initializeTimeoutSeconds = 8.0
-        self.requestTimeoutSeconds = 3.0
+        self.requestTimeoutSeconds = Self.defaultRequestTimeoutSeconds
         self.codexExecutableResolver = defaultCodexExecutableResolver
         self.codexArguments = ["-s", "read-only", "-a", "never", "app-server"]
     }

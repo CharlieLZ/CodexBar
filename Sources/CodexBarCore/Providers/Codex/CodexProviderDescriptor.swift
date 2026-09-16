@@ -120,7 +120,9 @@ public enum CodexProviderDescriptor {
                     supportsInlineTokenCostDashboard: true)),
             fetchPlan: ProviderFetchPlan(
                 sourceModes: [.auto, .web, .cli, .oauth, .api],
-                pipeline: ProviderFetchPipeline(resolveStrategies: self.resolveStrategies)),
+                pipeline: ProviderFetchPipeline(
+                    resolveStrategies: self.resolveStrategies,
+                    resolveFallbackError: self.resolveFallbackError)),
             cli: ProviderCLIConfig(
                 name: "codex",
                 binaryLocator: { BinaryLocator.resolveCodexBinary() },
@@ -129,6 +131,32 @@ public enum CodexProviderDescriptor {
                 prefersBinaryLocatorForWhich: true,
                 ttyStatusCommand: "/status",
                 browserSupportExemption: { sourceMode, _, _ in sourceMode == .auto }))
+    }
+
+    /// Keeps an authoritative credential failure when the CLI fallback cannot answer.
+    ///
+    /// `CodexOAuthFetchStrategy` deliberately hands `.unauthorized` to the CLI (the CLI owns the
+    /// refresh-token lifecycle), so the CLI's error replaces it. When that CLI attempt merely fails
+    /// to reply, the swap trades "sign in again" for a message that names no account state at all —
+    /// which the menu then renders as the generic "Unavailable". Prefer the diagnostic that names
+    /// the problem. A CLI reply that carries its own text (`requestFailed`/`malformed`) stays
+    /// authoritative, because it is fresher evidence than the OAuth attempt.
+    static func resolveFallbackError(_ previous: Error?, _ current: Error) -> Error {
+        guard let previousError = previous as? CodexOAuthFetchError,
+              case .unauthorized = previousError,
+              Self.isUninformativeCLIFailure(current)
+        else { return current }
+        return previousError
+    }
+
+    private static func isUninformativeCLIFailure(_ error: Error) -> Bool {
+        guard let rpcError = error as? RPCWireError else { return false }
+        switch rpcError {
+        case .timeout:
+            return true
+        case .startFailed, .requestFailed, .malformed:
+            return false
+        }
     }
 
     private static func resolveStrategies(context: ProviderFetchContext) async -> [any ProviderFetchStrategy] {

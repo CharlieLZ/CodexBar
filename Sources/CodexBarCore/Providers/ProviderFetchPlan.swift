@@ -377,7 +377,12 @@ public struct ProviderFetchPipeline: Sendable {
                 if strategy.shouldFallback(on: error, context: context) {
                     continue
                 }
-                return ProviderFetchOutcome(result: .failure(error), attempts: attempts)
+                // The provider's `resolveFallbackError` already decided which failure to report; a
+                // terminal strategy must not undo that by returning the raw current error, or the
+                // decision would only ever apply to the loop-exhausted path.
+                return ProviderFetchOutcome(
+                    result: .failure(lastAvailableError ?? error),
+                    attempts: attempts)
             }
         }
 
